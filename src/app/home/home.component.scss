@@ -1,12 +1,11 @@
 .container{
   display: flex;
-  padding-top: 40px;
   background-color: #fff;
   aside.teams{
     flex: 0 0 25%;
     max-width: 420px;
     min-width: 240px;
-    min-height: 90vh;
+    min-height: 100vh;
     background: #fff;
   }
   main.chat{
