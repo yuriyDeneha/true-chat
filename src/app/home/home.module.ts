@@ -7,9 +7,19 @@ import { HomeComponent } from './home.component';
 import { TeamsComponent } from './teams/teams.component';
 import { TeamLinkComponent } from './teams/team-link/team-link.component';
 import { ChatComponent } from './chat/chat.component';
+import { HomeService } from './services/home.service';
+import { WhatIsYourNameComponent } from './components/modals/what-is-your-name/what-is-your-name.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule, HomeRoutes, TranslateModule],
-  declarations: [HomeComponent, TeamsComponent, TeamLinkComponent, ChatComponent],
+  imports: [CommonModule, HomeRoutes, TranslateModule, FormsModule],
+  declarations: [
+    HomeComponent,
+    TeamsComponent,
+    TeamLinkComponent,
+    ChatComponent,
+    WhatIsYourNameComponent
+  ],
+  providers: [HomeService]
 })
 export class HomeModule {}
