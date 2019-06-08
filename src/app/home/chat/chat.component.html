@@ -2,7 +2,7 @@
   <h3>we don't believe the websites, we believe in conversation</h3>
   <div class="chat">
     <div class="day-message"
-         *ngFor="let day of home.selectedTeam.daysMessages">
+         *ngFor="let day of home.selectedConversation.daysMessages">
       <h4>{{day.date}}</h4>
       <div class="message-wrapper"
            *ngFor="let message of day.messages; index as index; last as isLast"
@@ -17,4 +17,3 @@
     </div>
   </div>
 </div>
-

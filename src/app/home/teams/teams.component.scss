@@ -13,8 +13,8 @@
     li{
       padding: 15px 10px;
       transition: background-color 0.1s ease-in-out;
-      &:hover{
-        cursor: pointer;
+      cursor: pointer;
+      &:hover, &.active{
         background: rgba(0, 0, 0, .05);
       }
     }

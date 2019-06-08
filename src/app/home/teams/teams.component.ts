@@ -8,7 +8,8 @@ import { HomeService } from '../services/home.service';
 })
 export class TeamsComponent implements OnInit {
 
-  teams = [
+  selectedConversationIndex: number = 0;
+  conversations = [
     {
       name: 'New clients support department',
       img: 'https://www.incimages.com/uploaded_files/image/970x450/getty_119557713_9707279704500162_61796.jpg',
@@ -126,12 +127,12 @@ export class TeamsComponent implements OnInit {
   constructor(private home: HomeService) { }
 
   ngOnInit() {
-    this.home.selectedTeam = this.teams[0];
+    this.home.selectedConversation = this.conversations[this.selectedConversationIndex];
   }
 
-  openTeamChat(team) {
-    console.log(team);
-    this.home.selectedTeam = team;
+  openConversation(index) {
+    this.selectedConversationIndex = index;
+    this.home.selectedConversation = this.conversations[index];
   }
 
 }

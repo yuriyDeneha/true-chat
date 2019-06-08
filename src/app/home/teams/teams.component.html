@@ -1,10 +1,11 @@
 <div class="teams">
-  <h3>Teams</h3>
+  <h3>Conversation</h3>
   <ul>
-    <li *ngFor="let team of teams">
-      <a (click)="openTeamChat(team)">
+    <li *ngFor="let conversation of conversations; let index = index"
+      [ngClass]="{active: index === selectedConversationIndex}">
+      <a (click)="openConversation(index)">
         <app-team-link
-          [team]="team"
+          [conversation]="conversation"
         ></app-team-link>
       </a>
     </li>

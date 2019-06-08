@@ -1,16 +1,16 @@
 <div class="team-link">
   <div class="img-wrapper">
-    <img [src]="team.img" alt="Team avatar">
+    <img [src]="conversation.img" alt="Team avatar">
   </div>
   <div class="last-message">
     <div class="first-row">
-      <h4 class="first-name">{{team.name}}</h4>
-      <span class="time">{{team.lastMessage.date}}</span>
+      <h4 class="first-name">{{conversation.name}}</h4>
+      <span class="time">{{conversation.lastMessage.date}}</span>
     </div>
     <div class="second-row">
-      <p class="text">{{team.lastMessage.author.firstName}}: {{team.lastMessage.text}}</p>
+      <p class="text">{{conversation.lastMessage.author.firstName}}: {{conversation.lastMessage.text}}</p>
       <i class="small-avatar">
-        <img [src]="team.lastMessage.author.img" alt="Author avatar">
+        <img [src]="conversation.lastMessage.author.img" alt="Author avatar">
       </i>
     </div>
   </div>

@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TeamLinkComponent implements OnInit {
 
-  @Input() team;
+  @Input() conversation;
 
   constructor() { }
 
