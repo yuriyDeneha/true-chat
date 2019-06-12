@@ -9,11 +9,85 @@
     background: #fff;
   }
   main.chat{
-    border-left: 1px solid rgba(0, 0, 0, .20);
+    // border-left: 1px solid rgba(0, 0, 0, .20);
     display: flex;
     flex: 3;
     flex-direction: column;
     min-width: 0;
     min-height: 70vh;
+  }
+  .lines{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    .run-line{
+      display: inline-block;
+      position: absolute;
+      height: 1px;
+      width: 1px;
+      background: rgba(0, 0, 0, 0.2);
+      &_to-right{
+        top: 7%;
+        left: 0%;
+        width: 100%;
+        animation: extend-x 3s 5s ease-in forwards;
+      }
+      &_to-bottom{
+        top: 0;
+        left: 25%;
+        height: 100%;
+        animation: extend-y 3s 5s ease-in forwards;
+      }
+    }
+  }
+}
+.start-bg{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: radial-gradient(#090909, #000000);
+  z-index: 3;
+  color: #333;
+  text-shadow: 2px 3px 3px #000;
+  font-size: 4em;
+  font-weight: bold;
+  animation: opacity 2s 5s ease-in forwards;
+  p{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+  }
+}
+
+@keyframes extend-x {
+  0%   { 
+    transform: translateX(-100%); 
+  }
+  100% { 
+    transform: translateX(0%);
+  }
+}
+
+@keyframes extend-y {
+  0%   { 
+    transform: translateY(-100%); 
+  }
+  100% { 
+    transform: translateY(0%);
+  }
+}
+
+@keyframes opacity {
+  0%   { 
+    opacity: 1; 
+  }
+  100% { 
+    opacity: 0;
   }
 }
