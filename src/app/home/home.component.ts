@@ -4,6 +4,8 @@ import { TransferHttpService } from '@gorniv/ngx-universal';
 import { MetaService } from '@ngx-meta/core';
 import { UniversalStorage } from '@shared/storage/universal.storage';
 import { DOCUMENT, isPlatformServer } from '@angular/common';
+import { interval, of } from 'rxjs';
+import { delay, delayWhen, first, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +14,18 @@ import { DOCUMENT, isPlatformServer } from '@angular/common';
 })
 export class HomeComponent implements OnInit {
   errorMessage: string;
+  title = '';
+  services = [
+    'web development',
+    'consulting',
+    'ui/ux design',
+    'hybrid mobile development',
+    'startup MVP development',
+    'remote developers for hire',
+    'tech support after release'
+  ];
+  // titleString = 'we don\'t believe the websites, we believe in conversation';
+
   constructor(
     @Inject(PLATFORM_ID) private _platformId: Object,
     private _http: TransferHttpService,
@@ -39,5 +53,36 @@ export class HomeComponent implements OnInit {
     const t = window;
     const t1 = document;
     this._meta.setTag('description', 'Meta update from init');
+    this.startTitleAnimation();
+  }
+
+  startTitleAnimation() {
+
+    const typingSpeed = 120;
+    let delayBetweenWords = 0;
+    this.services.forEach((service, index) => {
+      delayBetweenWords += index  > 0 ? this.services[index - 1].length * typingSpeed + 1500 : 0;
+
+      const animation = interval(typingSpeed);
+      this.setWordResetCleaner(animation, delayBetweenWords);
+      animation
+        .pipe(
+          delay(delayBetweenWords),
+          take(service.length),
+        )
+        .subscribe( () => {
+          this.title += service[this.title.length];
+        });
+    });
+  }
+
+  setWordResetCleaner(animation, delayBetweenWords) {
+    animation
+      .pipe(
+        delay(delayBetweenWords),
+        first()
+      ).subscribe( () => {
+      this.title = '';
+    });
   }
 }

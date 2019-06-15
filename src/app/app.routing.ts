@@ -6,13 +6,13 @@ import { AuthGuard } from '@shared/guards/auth.guard';
 import { UnAuthGuard } from '@shared/guards/un-auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'yuriy.deneha', pathMatch: 'full' },
   {
     path: '',
     component: WrapperComponent,
     canActivateChild: [MetaGuard],
     children: [
-      { path: 'home', loadChildren: './home/home.module#HomeModule' },
+      { path: 'yuriy.deneha', loadChildren: './home/home.module#HomeModule' },
     ],
   },
   {

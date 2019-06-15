@@ -1,16 +1,13 @@
 <div class="chat-wrapper">
-  <h3>we don't believe the websites, we believe in conversation</h3>
   <div class="chat">
-    <div class="day-message"
-         *ngFor="let day of home.selectedConversation.daysMessages">
+    <div class="day-message" *ngFor="let day of daysMessages">
       <h4>{{day.date}}</h4>
       <div class="message-wrapper"
            *ngFor="let message of day.messages; index as index; last as isLast"
-           [ngClass]="{'own': message.author.type === 'guest'}">
+           [ngClass]="{'guest': message.author.type !== 'yura'}">
         <div class="avatar">
-          <img *ngIf="message.author.type !== 'guest' &&
-                  !(!isLast && day.messages[index+1].author.type === message.author.type)"
-               [src]="message.author.avatar" alt="Andriy">
+          <img *ngIf="!(!isLast && day.messages[index+1].author.type === message.author.type)"
+               [src]="message.author.avatar || 'assets/img/yura.jpg'" alt="Andriy">
         </div>
         <p class="message">{{message.text}}</p>
       </div>
