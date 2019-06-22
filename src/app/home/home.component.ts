@@ -5,7 +5,7 @@ import { MetaService } from '@ngx-meta/core';
 import { UniversalStorage } from '@shared/storage/universal.storage';
 import { DOCUMENT, isPlatformServer } from '@angular/common';
 import { interval, of } from 'rxjs';
-import { delay, delayWhen, first, take } from 'rxjs/operators';
+import { first, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   title = '';
   services = [
     'web development',
-    'consulting',
+    'IT consulting',
     'ui/ux design',
     'hybrid mobile development',
     'startup MVP development',
@@ -60,29 +60,35 @@ export class HomeComponent implements OnInit {
 
     const typingSpeed = 120;
     let delayBetweenWords = 0;
-    this.services.forEach((service, index) => {
-      delayBetweenWords += index  > 0 ? this.services[index - 1].length * typingSpeed + 1500 : 0;
 
+
+    const delay = (delay) => {
+      return new Promise(resolve => setTimeout(resolve, delay));
+    };
+
+    async function animationProcess(services, index, self) {
+      const previousElementIndex = index ? index - 1: services.length - 1;
+      delayBetweenWords = services[previousElementIndex].length * typingSpeed + 1500;
+
+      await delay(delayBetweenWords);
       const animation = interval(typingSpeed);
-      this.setWordResetCleaner(animation, delayBetweenWords);
       animation
         .pipe(
-          delay(delayBetweenWords),
-          take(service.length),
+          take(services[index].length),
         )
-        .subscribe( () => {
-          this.title += service[this.title.length];
+        .subscribe(() => {
+          const letterIndex = self.title.length;
+          self.title += services[index][letterIndex];
         });
-    });
-  }
-
-  setWordResetCleaner(animation, delayBetweenWords) {
-    animation
-      .pipe(
-        delay(delayBetweenWords),
-        first()
-      ).subscribe( () => {
-      this.title = '';
-    });
+    }
+    async function processArray(services, self) {
+      let index = -1;
+      while (true) {
+        index = index === services.length - 1 ? 0 : index + 1;
+        await animationProcess(services, index, self);
+        self.title = '';
+      }
+    }
+    processArray(this.services, this);
   }
 }
