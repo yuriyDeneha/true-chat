@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
     'remote developers for hire',
     'tech support after release'
   ];
+  guestName: string;
   // titleString = 'we don\'t believe the websites, we believe in conversation';
 
   constructor(
@@ -90,5 +91,10 @@ export class HomeComponent implements OnInit {
       }
     }
     processArray(this.services, this);
+  }
+
+
+  onModalClose(name = '') {
+    this.guestName = name;
   }
 }

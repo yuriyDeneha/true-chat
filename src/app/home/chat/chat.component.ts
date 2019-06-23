@@ -11,21 +11,21 @@ export class ChatComponent implements OnInit {
   messages: Message[] = [
     {
       text: 'Hi Daniel, I\'m a struggling IT entrepreneur, Co-Founder of Codelions team.',
-      delay: 5000,
+      delay: 7000,
       author: {
         type: 'yura',
       }
     },
     {
       text: 'You know, I don\'t believe the websites, I believe in conversation',
-      delay: 3500,
+      delay: 4500,
       author: {
         type: 'yura',
       }
     },
     {
       text: 'Glad to have your visit on my website',
-      delay: 1000,
+      delay: 3000,
       author: {
         type: 'yura',
       }

@@ -1,3 +1,5 @@
+@import 'src/styles/core/schema';
+
 .container{
   display: flex;
   background-color: #fff;
@@ -19,15 +21,16 @@
 }
 .start-bg{
   position: fixed;
-  width: 100%;
+  width: calc(100% - 60px);
   height: 100%;
   top: 0;
   left: 0;
-  background: radial-gradient(#090909, #000000);
+  background: radial-gradient($bg, $bg);
   z-index: 3;
-  color: #a3a3a3;
+  color: #1c1c1c;
   display: flex;
   flex-direction: column;
+  margin: 30px;
   //animation: opacity 2s 55s ease-in forwards;
   .top-section{
     width: 80%;
@@ -39,9 +42,13 @@
       overflow: hidden;
       border-radius: 50%;
       margin: 0;
+      border: 5px solid #2296f0;
       img{
-        width: 100%;
+        width: calc(100% + 16px);
         height: auto;
+        position: relative;
+        top: -8px;
+        left: -8px;
       }
     }
 
@@ -50,7 +57,7 @@
       margin: 20px 0 0 0;
       font-size: 1.6em;
       font-weight: 200;
-      text-shadow: 2px 3px 3px #000;
+      //text-shadow: 2px 3px 3px #000;
       line-height: 1.3;
       &.margin-options{
         display: inline-block;
@@ -63,24 +70,27 @@
           width: 50px;
           height: 0px;
           margin: 0px 5px;
-          border-top: 5px solid rgb(57, 155, 224);
-          border-bottom: 5px solid rgb(216, 191, 1);
+          border-top: 5px solid #4fb6ff;
+          border-bottom: 5px solid #f1d611;
         }
       }
       .services{
         color: #fff;
-        background-image: linear-gradient(to left, rgb(216, 60, 204), rgb(57, 155, 224));
+        background-image: linear-gradient(to left, $active, $active);
         text-shadow: none;
         padding: 8px 8px;
         margin: 0px 5px;
         &:after{
           content: '';
           display: inline-block;
-          border-bottom: 4px solid #fff;
-          width: 20px;
-          margin: 0px 5px;
+          border-bottom: 3px solid #fff;
+          width: 10px;
+          margin: 0px 3px;
           animation: opacity 400ms linear infinite;
         }
+      }
+      .icon-waving{
+        animation: waving 800ms 3s linear infinite;
       }
     }
   }
@@ -90,9 +100,10 @@
     padding-top: 15px;
     width: 80%;
     margin: 0 auto;
-    background: #1f1f1f;
-    box-shadow: inset 8px 1px 20px 1px #292929;
+    background: rgba(#fff, 0.7);
+    box-shadow: 0px 20px 20px 0px rgba(218, 218, 218, 0.7);
     border-radius: 50px;
+    z-index: 3;
   }
   .logo{
     position: absolute;
@@ -120,35 +131,28 @@
       position: absolute;
       height: 1px;
       width: 1px;
-      background: rgba(255, 255, 255, 0.2);
-      animation: extend-x 5s ease-in-out infinite;
+      background: rgba(0, 0, 0, 0.1);
+      animation: extend-x 8s linear infinite;
       &_to-right{
-        left: 0%;
+        top: 5%;
         width: 100%;
         animation-name: extend-x;
-        &:nth-child(1){
-          top: 10%;
-          animation-delay: 1s;
-        }
-        &:nth-child(2){
-          top: 40%;
-          animation-delay: 1.9s;
-        }
-        &:nth-child(3){
-          top: 75%;
-          animation-delay: 2.4s;
-        }
       }
       &_to-bottom{
         top: 0;
         height: 100%;
         animation-name: extend-y;
         &:nth-child(1){
-          left: 30%;
+          left: 10%;
+          animation-delay: 0s;
         }
         &:nth-child(2){
-          left: 70%;
-          animation-delay: 1s;
+          left: 50%;
+          animation-delay: 0.9s;
+        }
+        &:nth-child(3){
+          left: 90%;
+          animation-delay: 1.4s;
         }
       }
     }
@@ -179,5 +183,17 @@
   }
   100% { 
     opacity: 0;
+  }
+}
+
+@keyframes waving {
+  0%   {
+    transform: rotate(0deg);
+  }
+  50%   {
+    transform: rotate(15deg);
+  }
+  100% {
+    transform: rotate(0deg);
   }
 }

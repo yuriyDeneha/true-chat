@@ -7,16 +7,18 @@
   <!--</main>-->
   <div class="start-bg">
     <div class="lines">
-      <span class="run-line run-line_to-right"></span>
-      <span class="run-line run-line_to-right"></span>
-      <span class="run-line run-line_to-right"></span>
       <span class="run-line run-line_to-bottom"></span>
+      <span class="run-line run-line_to-bottom"></span>
+      <span class="run-line run-line_to-bottom"></span>
+      <span class="run-line run-line_to-right"></span>
     </div>
     <div class="top-section">
       <div class="avatar">
         <img src="assets/img/yura.jpg" alt="Avatar">
       </div>
-      <p class="margin-options ukraine-flag">Hi, I'm Yuriy Deneha. Tech guy based in Ukraine</p>
+      <p class="margin-options ukraine-flag">
+        Hi <i class="icon icon-waving"></i>
+        , I'm Yuriy Deneha. Tech guy based in Ukraine</p>
       <p> Contact me for
         <span class="services">{{title}}</span>
       </p>
@@ -28,8 +30,11 @@
         <img src="assets/img/logo_white.png" alt="Logo">
       </div>
     </div>
+    <app-what-is-your-name
+      (close)="onModalClose(name)"
+    ></app-what-is-your-name>
+
 
   </div>
 </section>
 
-<!--<app-what-is-your-name></app-what-is-your-name>-->

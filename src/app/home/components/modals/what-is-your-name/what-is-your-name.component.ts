@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-what-is-your-name',
@@ -7,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WhatIsYourNameComponent implements OnInit {
 
+  @Output() close = new EventEmitter<string>();
   constructor() { }
 
   ngOnInit() {
   }
+
 }
