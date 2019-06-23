@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../services/home.service';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-chat',
@@ -10,7 +11,7 @@ export class ChatComponent implements OnInit {
 
   messages: Message[] = [
     {
-      text: 'Hi Daniel, I\'m a struggling IT entrepreneur, Co-Founder of Codelions team.',
+      text: 'Hi *NAME*, I\'m a struggling IT entrepreneur',
       delay: 7000,
       author: {
         type: 'yura',
@@ -24,7 +25,7 @@ export class ChatComponent implements OnInit {
       }
     },
     {
-      text: 'Glad to have your visit on my website',
+      text: 'I\'m glad to have you here. How can I help you?',
       delay: 3000,
       author: {
         type: 'yura',
@@ -34,13 +35,17 @@ export class ChatComponent implements OnInit {
 
   isTyping: boolean = false;
   messagesAsync = [];
-  constructor(public home: HomeService) { }
+  constructor(
+    public home: HomeService,
+    private storage: StorageService
+  ) { }
 
   ngOnInit() {
     const previousConversationNotParsed = localStorage.getItem('conversation');
 
     if (!previousConversationNotParsed) {
       this.startConversation();
+      this.storage.setItem('conversation', this.messages);
     } else {
       this.messagesAsync = JSON.parse(previousConversationNotParsed);
     }
@@ -53,11 +58,13 @@ export class ChatComponent implements OnInit {
       return new Promise(resolve => setTimeout(resolve, delay));
     };
 
-    const addNewMessage = async (message) => {
+    const addNewMessage = async (messageObject) => {
       await delay(500);
       this.isTyping = true;
-      await delay(message.delay);
-      this.messagesAsync.push(message);
+      await delay(messageObject.delay);
+      messageObject.text = this.setMessageValues(messageObject.text);
+      messageObject.date = new Date();
+      this.messagesAsync.push(messageObject);
       this.isTyping = false;
     };
     for (const message of this.messages) {
@@ -94,19 +101,23 @@ export class ChatComponent implements OnInit {
     if (typeof date === 'string' || date instanceof String) {
       date = new Date(date);
     }
-
     return date.toLocaleDateString('en-US', options);
   }
 
   addNewMessage($event) {
-    console.log($event.target);
     const message = $event.target.value;
     $event.target.value = '';
-    console.log(message);
     this.messagesAsync.push( new Message(message));
-    localStorage.setItem('conversation', JSON.stringify(this.messagesAsync));
+    this.storage.setItem('conversation', this.messagesAsync);
   }
 
+  setMessageValues(message: string) {
+    const guestName = this.storage.getItem('guestName');
+    console.log(guestName);
+    message = message.replace('*NAME*', guestName);
+
+    return message;
+  }
 }
 
 export  class  Message {

@@ -6,5 +6,6 @@
   background-size: contain;
   &-waving{
     background-image: url('assets/icons/waving.png');
+    animation: waving 800ms 1s linear infinite;
   }
 }

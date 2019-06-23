@@ -20,9 +20,9 @@
   }
 }
 .start-bg{
-  position: fixed;
+  position: relative;
   width: calc(100% - 60px);
-  height: 100%;
+  height: auto;
   top: 0;
   left: 0;
   background: radial-gradient($bg, $bg);
@@ -31,6 +31,11 @@
   display: flex;
   flex-direction: column;
   margin: 30px;
+  padding-bottom: 200px;
+  transition: filter 0.5s ease-in-out;
+  &.blur{
+    filter: blur(6px);
+  }
   //animation: opacity 2s 55s ease-in forwards;
   .top-section{
     width: 80%;
@@ -90,7 +95,6 @@
         }
       }
       .icon-waving{
-        animation: waving 800ms 3s linear infinite;
       }
     }
   }
@@ -99,11 +103,12 @@
     top: 0px;
     padding-top: 15px;
     width: 80%;
+    min-height: 60vh;
     margin: 0 auto;
     background: rgba(#fff, 0.7);
     box-shadow: 0px 20px 20px 0px rgba(218, 218, 218, 0.7);
     border-radius: 50px;
-    z-index: 3;
+    z-index: 6;
   }
   .logo{
     position: absolute;
@@ -159,41 +164,3 @@
   }
 }
 
-@keyframes extend-x {
-  0%   { 
-    transform: translateX(-100%); 
-  }
-  100% { 
-    transform: translateX(100%);
-  }
-}
-
-@keyframes extend-y {
-  0%   { 
-    transform: translateY(-100%); 
-  }
-  100% { 
-    transform: translateY(1000%);
-  }
-}
-
-@keyframes opacity {
-  0%   { 
-    opacity: 1; 
-  }
-  100% { 
-    opacity: 0;
-  }
-}
-
-@keyframes waving {
-  0%   {
-    transform: rotate(0deg);
-  }
-  50%   {
-    transform: rotate(15deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
-}

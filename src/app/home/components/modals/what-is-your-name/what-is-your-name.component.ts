@@ -1,4 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { HomeService } from '../../../services/home.service';
+import { StorageService } from '../../../services/storage.service';
 
 @Component({
   selector: 'app-what-is-your-name',
@@ -7,10 +9,34 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class WhatIsYourNameComponent implements OnInit {
 
+  name = '';
+  isNameStored: boolean = false;
   @Output() close = new EventEmitter<string>();
-  constructor() { }
+
+  constructor(
+    private storage: StorageService
+  ) { }
 
   ngOnInit() {
+    this.getInitialState();
   }
 
+  getInitialState() {
+    this.name = this.storage.getItem('guestName');
+    this.isNameStored = !!this.name;
+  }
+
+  confirmModal() {
+    this.close.emit(this.name);
+  }
+
+
+  getGreetings() {
+    const whatIsYourName = 'What is your name?',
+          gladToSeeYouAgain = `Hi ${this.name}, I\'m glad to see you again!`;
+
+    return this.isNameStored ?
+      gladToSeeYouAgain :
+      whatIsYourName;
+  }
 }

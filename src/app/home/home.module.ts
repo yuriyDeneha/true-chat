@@ -10,6 +10,7 @@ import { ChatComponent } from './chat/chat.component';
 import { HomeService } from './services/home.service';
 import { WhatIsYourNameComponent } from './components/modals/what-is-your-name/what-is-your-name.component';
 import { FormsModule } from '@angular/forms';
+import { StorageService } from './services/storage.service';
 
 @NgModule({
   imports: [CommonModule, HomeRoutes, TranslateModule, FormsModule],
@@ -20,6 +21,6 @@ import { FormsModule } from '@angular/forms';
     ChatComponent,
     WhatIsYourNameComponent
   ],
-  providers: [HomeService]
+  providers: [HomeService, StorageService]
 })
 export class HomeModule {}

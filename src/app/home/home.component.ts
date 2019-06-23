@@ -6,6 +6,7 @@ import { UniversalStorage } from '@shared/storage/universal.storage';
 import { DOCUMENT, isPlatformServer } from '@angular/common';
 import { interval, of } from 'rxjs';
 import { first, take } from 'rxjs/operators';
+import { StorageService } from './services/storage.service';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +25,8 @@ export class HomeComponent implements OnInit {
     'remote developers for hire',
     'tech support after release'
   ];
-  guestName: string;
+  showModalName: boolean = false;
+  showChat: boolean = false;
   // titleString = 'we don\'t believe the websites, we believe in conversation';
 
   constructor(
@@ -34,9 +36,17 @@ export class HomeComponent implements OnInit {
     private _universalStorage: UniversalStorage,
     // instead window.document
     @Inject(DOCUMENT) private _document: Document,
+    private storage: StorageService
   ) {}
 
   ngOnInit(): void {
+    this.setAppOptions();
+    this.startTitleAnimation();
+
+    setTimeout( () => this.showModalName = true, 1000);
+  }
+
+  setAppOptions() {
     this._universalStorage.removeItem('test');
     let resultCookie = this._universalStorage.getItem('test');
     if (resultCookie) {
@@ -54,7 +64,6 @@ export class HomeComponent implements OnInit {
     const t = window;
     const t1 = document;
     this._meta.setTag('description', 'Meta update from init');
-    this.startTitleAnimation();
   }
 
   startTitleAnimation() {
@@ -95,6 +104,10 @@ export class HomeComponent implements OnInit {
 
 
   onModalClose(name = '') {
-    this.guestName = name;
+    console.log(name);
+
+    this.storage.setItem('guestName', name);
+    this.showModalName = false;
+    this.showChat = true;
   }
 }

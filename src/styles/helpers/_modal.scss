@@ -1,3 +1,5 @@
+@import "../core/schema";
+
 .modal{
   position: fixed;
   z-index: 999;
@@ -16,10 +18,10 @@
     top: 0;
     left: 0;
     z-index: 998;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(255, 255, 255, 0.4);
   }
   &-blue{
-    background-color: #bf18b5;
+    background-color: $active;
     color: #fff;
   }
 }

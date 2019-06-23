@@ -1,5 +1,6 @@
 <div class="chat-wrapper">
-  <div class="chat">
+  <div class="chat"
+       #scrollMe [scrollTop]="scrollMe.scrollHeight">
     <div class="message-wrapper"
          *ngFor="let message of messagesAsync; index as index"
          [ngClass]="{'guest': message.author.type !== 'yura'}">

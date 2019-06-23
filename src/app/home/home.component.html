@@ -5,7 +5,8 @@
   <!--<main class="chat">-->
     <!--<app-chat></app-chat>-->
   <!--</main>-->
-  <div class="start-bg">
+  <div class="start-bg"
+    [ngClass]="{'blur': showModalName}">
     <div class="lines">
       <span class="run-line run-line_to-bottom"></span>
       <span class="run-line run-line_to-bottom"></span>
@@ -25,16 +26,19 @@
     </div>
 
     <div class="bottom-section">
-      <app-chat></app-chat>
-      <div class="logo">
-        <img src="assets/img/logo_white.png" alt="Logo">
-      </div>
+      <app-chat
+        *ngIf="showChat"
+      ></app-chat>
     </div>
-    <app-what-is-your-name
-      (close)="onModalClose(name)"
-    ></app-what-is-your-name>
-
-
+    <div class="logo">
+      <img src="assets/img/logo_black.png" alt="Logo">
+    </div>
   </div>
+
+  <app-what-is-your-name
+    *ngIf="showModalName"
+    (close)="onModalClose($event)"
+  ></app-what-is-your-name>
+
 </section>
 
