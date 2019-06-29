@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from '../services/home.service';
+import { HomeService, Message } from '../services/home.service';
 import { StorageService } from '../services/storage.service';
 
 @Component({
@@ -49,28 +49,31 @@ export class ChatComponent implements OnInit {
     } else {
       this.messagesAsync = JSON.parse(previousConversationNotParsed);
     }
+
+    this.getChatUpdates();
   }
 
 
   async startConversation() {
 
-    const delay = (delay) => {
-      return new Promise(resolve => setTimeout(resolve, delay));
-    };
-
-    const addNewMessage = async (messageObject) => {
-      await delay(500);
-      this.isTyping = true;
-      await delay(messageObject.delay);
-      messageObject.text = this.setMessageValues(messageObject.text);
-      messageObject.date = new Date();
-      this.messagesAsync.push(messageObject);
-      this.isTyping = false;
-    };
     for (const message of this.messages) {
-      await addNewMessage(message);
+      await this.addMessageToChat(message);
     }
   }
+
+  async addMessageToChat (messageObject) {
+    await this.delay(500);
+    this.isTyping = true;
+    await this.delay(messageObject.delay);
+    messageObject.text = this.setMessageValues(messageObject.text);
+    messageObject.date = new Date();
+    this.messagesAsync.push(messageObject);
+    this.isTyping = false;
+  };
+
+  delay(delay) {
+    return new Promise(resolve => setTimeout(resolve, delay));
+  };
 
   isMyMessageAndLatestOne(index) {
     return index === this.messagesAsync.length - 1
@@ -108,7 +111,8 @@ export class ChatComponent implements OnInit {
     const message = $event.target.value;
     $event.target.value = '';
     this.messagesAsync.push( new Message(message));
-    this.storage.setItem('conversation', this.messagesAsync);
+    this.storeConversationInStorage();
+    this.sendMessage(message);
   }
 
   setMessageValues(message: string) {
@@ -118,23 +122,27 @@ export class ChatComponent implements OnInit {
 
     return message;
   }
-}
 
-export  class  Message {
-  text: string;
-  date?: Date | string;
-  delay?: number;
-  author: {
-    type: string,
-    avatar?: string,
-  };
-  constructor (message: string) {
-    this.text = message;
-    this.date = new Date();
-    this.author = {
-      type: 'guest',
-      avatar: ''
-    };
+  sendMessage(message) {
+    this.home.sendMessage(message)
+      .subscribe(response => {
+        console.log(response);
+      });
   }
 
+  getChatUpdates() {
+    this.home.getChatUpdates()
+      .subscribe((messages: Message[]) => {
+        console.log(messages);
+        messages.forEach((message: Message) => {
+          this.addMessageToChat(message);
+        });
+        this.storeConversationInStorage();
+      });
+  }
+
+  storeConversationInStorage() {
+    this.storage.setItem('conversation', this.messagesAsync);
+  }
 }
+
