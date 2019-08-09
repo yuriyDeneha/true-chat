@@ -28,7 +28,7 @@ export function initLanguage(translateService: TranslatesService): Function {
 @NgModule({
   imports: [
     BrowserModule.withServerTransition({ appId: 'my-app' }),
-    TransferHttpCacheModule,
+    // TransferHttpCacheModule,
     HttpClientModule,
     RouterModule,
     AppRoutes,

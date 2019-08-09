@@ -66,7 +66,7 @@ export class ChatComponent implements OnInit {
     this.isTyping = true;
     await this.delay(messageObject.delay);
     messageObject.text = this.setMessageValues(messageObject.text);
-    messageObject.date = new Date();
+    messageObject.date = messageObject.date || new Date();
     this.messagesAsync.push(messageObject);
     this.isTyping = false;
   };
@@ -117,7 +117,6 @@ export class ChatComponent implements OnInit {
 
   setMessageValues(message: string) {
     const guestName = this.storage.getItem('guestName');
-    console.log(guestName);
     message = message.replace('*NAME*', guestName);
 
     return message;
@@ -126,18 +125,17 @@ export class ChatComponent implements OnInit {
   sendMessage(message) {
     this.home.sendMessage(message)
       .subscribe(response => {
-        console.log(response);
       });
   }
 
   getChatUpdates() {
     this.home.getChatUpdates()
       .subscribe((messages: Message[]) => {
-        console.log(messages);
         messages.forEach((message: Message) => {
+          this.messagesAsync = [];
           this.addMessageToChat(message);
         });
-        this.storeConversationInStorage();
+        // this.storeConversationInStorage();
       });
   }
 
