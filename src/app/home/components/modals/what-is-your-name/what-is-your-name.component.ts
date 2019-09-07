@@ -22,7 +22,7 @@ export class WhatIsYourNameComponent implements OnInit {
   }
 
   getInitialState() {
-    this.name = this.storage.getItem('guestName');
+    this.name = this.storage.getItem('guestName', true);
     this.isNameStored = !!this.name;
   }
 

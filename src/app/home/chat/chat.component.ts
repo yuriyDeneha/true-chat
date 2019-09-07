@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService, Message } from '../services/home.service';
+import { HomeService } from '../services/home.service';
 import { StorageService } from '../services/storage.service';
+import { Message } from '../models/messenger.interface';
 
 @Component({
   selector: 'app-chat',
@@ -41,13 +42,13 @@ export class ChatComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const previousConversationNotParsed = localStorage.getItem('conversation');
+    const previousConversation = this.storage.getItem('conversation');
 
-    if (!previousConversationNotParsed) {
+    if (!previousConversation) {
       this.startConversation();
-      this.storage.setItem('conversation', this.messages);
+      this.messages.forEach((message: Message) => this.storage.updateMessages(message));
     } else {
-      this.messagesAsync = JSON.parse(previousConversationNotParsed);
+      this.messagesAsync = previousConversation;
     }
 
     this.getChatUpdates();
@@ -69,11 +70,11 @@ export class ChatComponent implements OnInit {
     messageObject.date = messageObject.date || new Date();
     this.messagesAsync.push(messageObject);
     this.isTyping = false;
-  };
+  }
 
   delay(delay) {
     return new Promise(resolve => setTimeout(resolve, delay));
-  };
+  }
 
   isMyMessageAndLatestOne(index) {
     return index === this.messagesAsync.length - 1
@@ -110,13 +111,12 @@ export class ChatComponent implements OnInit {
   addNewMessage($event) {
     const message = $event.target.value;
     $event.target.value = '';
-    this.messagesAsync.push( new Message(message));
-    this.storeConversationInStorage();
+    this.messagesAsync = this.storage.updateMessages(new Message(message));
     this.sendMessage(message);
   }
 
   setMessageValues(message: string) {
-    const guestName = this.storage.getItem('guestName');
+    const guestName = this.storage.getItem('guestName', true);
     message = message.replace('*NAME*', guestName);
 
     return message;
@@ -125,22 +125,18 @@ export class ChatComponent implements OnInit {
   sendMessage(message) {
     this.home.sendMessage(message)
       .subscribe(response => {
+        console.log(response);
       });
   }
 
   getChatUpdates() {
     this.home.getChatUpdates()
       .subscribe((messages: Message[]) => {
-        messages.forEach((message: Message) => {
-          this.messagesAsync = [];
-          this.addMessageToChat(message);
-        });
-        // this.storeConversationInStorage();
-      });
-  }
 
-  storeConversationInStorage() {
-    this.storage.setItem('conversation', this.messagesAsync);
+        if (messages.length !== this.messagesAsync.length) {
+          this.messagesAsync = messages;
+        }
+      });
   }
 }
 

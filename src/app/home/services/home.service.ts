@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { delay, filter, flatMap, map, repeat, retry, tap } from 'rxjs/operators';
 import { interval } from 'rxjs';
 import { StorageService } from './storage.service';
+import { TelegramResponse, Message } from '../models/messenger.interface';
+
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +36,7 @@ export class HomeService {
       `allowed_updates=${allowed}&` +
       // `timeout=${timeout}&` +
       `limit=${limit}`;
-    return interval(3000)
+    return interval(6000)
       .pipe(
         flatMap(() => {
           console.log('new call');
@@ -54,52 +56,19 @@ export class HomeService {
     updates
       .map((update: { channel_post: Object }) => update.channel_post)
       .forEach((mappedUpdate: Message) => {
+        console.log('mapUpdatesToMessages', mappedUpdate);
+
         const type = mappedUpdate.author_signature ===  this.YURIY_SIGNATURE ? 'yura' : 'guest';
-        const message = new Message(mappedUpdate.text, mappedUpdate.date, type);
+        const message = new Message(mappedUpdate.text, mappedUpdate.date, type, mappedUpdate.message_id);
         messages.push(message);
     });
+
+    console.log(messages);
     return messages;
   }
 
   updateMessages(messages) {
-    const currentUpdate = messages[messages.length - 1].date.toString();
-    const lastUpdate = this.storage.getItem('lastUpdate');
-    if (currentUpdate > lastUpdate) {
-      this.storage.setItem('lastUpdate', currentUpdate);
-    } else {
-      return [];
-    }
-    return messages;
-  }
-}
-
-interface TelegramResponse {
-  ok: boolean;
-  result: Array<any>;
-}
-
-interface TelegramUpdate {
-  text: string;
-  date: number;
-}
-
-interface TelegramUpdate {
-  ok: boolean;
-  result: Array<any>;
-}
-
-export class Message {
-  text: string;
-  date?: Date | number;
-  delay?: number;
-  author_signature?: string;
-  author: {
-    type: string,
-    avatar?: string,
-  };
-  constructor (message: string = '', date: Date | number = 0, type: string = 'guest') {
-    this.text = message;
-    this.date = new Date(date * 1000);
-    this.author = { type };
+    messages.forEach((message) => this.storage.updateMessages(message));
+    return this.storage.getItem('conversation');
   }
 }

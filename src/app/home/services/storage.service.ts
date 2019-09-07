@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Message } from '../models/messenger.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +11,14 @@ export class StorageService {
 
 
 
-  getItem(property): any {
+  getItem(property, isString = false): any {
     const value = this.storage.getItem(property);
-    if (this.isString(value)) {
+
+    if (isString) {
       return value;
     }
-    return value ? JSON.parse(value) : null;
+    const parsedValue = value ? JSON.parse(value) : null;
+    return parsedValue;
   }
 
   setItem(property, value): any {
@@ -23,6 +26,33 @@ export class StorageService {
       value :
       JSON.stringify(value);
     this.storage.setItem(property, valueConvertedToString);
+  }
+
+  updateMessages(newMessage: Message): any {
+    const messages = this.getItem('conversation') || [];;
+
+    if (!newMessage.id) {
+      newMessage.id = this.generateId(messages.map((message: Message) => message.id));
+      messages.push(newMessage);
+    } else {
+      if (messages.every((mes) => mes.id !== newMessage.id)) {
+        messages.push(newMessage);
+      }
+    }
+
+    this.setItem('conversation', messages);
+    return messages;
+  }
+
+  generateId(array: Array<number>) {
+    const min = 10;
+    const max = 1000000;
+    let rand;
+    do {
+      rand = Math.floor(Math.random() * (max - min + 1) + min);
+    } while (array.some((item) => item === rand));
+
+    return rand;
   }
 
   isString(value) {
