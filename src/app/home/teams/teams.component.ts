@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { HomeService } from '../services/home.service';
+import { HomeService } from '../services/chat.service';
 
 @Component({
   selector: 'app-teams',

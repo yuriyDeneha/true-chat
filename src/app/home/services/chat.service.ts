@@ -39,7 +39,6 @@ export class HomeService {
     return interval(6000)
       .pipe(
         flatMap(() => {
-          console.log('new call');
           return this.http.get(url)
             .pipe(
               filter((response: TelegramResponse) => response.ok),
@@ -56,7 +55,6 @@ export class HomeService {
     updates
       .map((update: { channel_post: Object }) => update.channel_post)
       .forEach((mappedUpdate: Message) => {
-        console.log('mapUpdatesToMessages', mappedUpdate);
 
         const type = mappedUpdate.author_signature ===  this.YURIY_SIGNATURE ? 'yura' : 'guest';
         const message = new Message(mappedUpdate.text, mappedUpdate.date, type, mappedUpdate.message_id);

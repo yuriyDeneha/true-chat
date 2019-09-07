@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from '../services/home.service';
+import { HomeService } from '../services/chat.service';
 import { StorageService } from '../services/storage.service';
 import { Message } from '../models/messenger.interface';
 
@@ -11,6 +11,13 @@ import { Message } from '../models/messenger.interface';
 export class ChatComponent implements OnInit {
 
   messages: Message[] = [
+    {
+      text: 'Hi, my name is *NAME*',
+      delay: 1000,
+      author: {
+        type: 'rockStar',
+      }
+    },
     {
       text: 'Hi *NAME*, I\'m a struggling IT entrepreneur',
       delay: 7000,
@@ -46,17 +53,19 @@ export class ChatComponent implements OnInit {
 
     if (!previousConversation) {
       this.startConversation();
-      this.messages.forEach((message: Message) => this.storage.updateMessages(message));
+      setTimeout(() => {
+        this.messages.forEach((message: Message) => this.storage.updateMessages(message));
+        this.getChatUpdates();
+      }, this.messages[0].delay + this.messages[1].delay + this.messages[2].delay);
     } else {
-      this.messagesAsync = previousConversation;
+      this.messagesAsync = previousConversation;    
+      this.getChatUpdates();
     }
 
-    this.getChatUpdates();
   }
 
 
   async startConversation() {
-
     for (const message of this.messages) {
       await this.addMessageToChat(message);
     }
@@ -123,6 +132,9 @@ export class ChatComponent implements OnInit {
   }
 
   sendMessage(message) {
+    if (!message){
+      return;
+    }
     this.home.sendMessage(message)
       .subscribe(response => {
         console.log(response);

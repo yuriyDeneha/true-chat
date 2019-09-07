@@ -7,15 +7,14 @@
       <h4 *ngIf="isAnotherDay(index)">
         {{dateFormat(message.date)}}
       </h4>
-      <div class="avatar">
-        <img *ngIf="isMyMessageAndLatestOne(index)"
-             [src]="message.author.avatar || 'assets/img/yura.jpg'" alt="Andriy">
+      <div class="avatar" [ngClass]="{'hidden-img': !isMyMessageAndLatestOne(index)}">
+        <img [src]="message.author.avatar || 'assets/img/yura.jpg'" alt="Andriy">
       </div>
       <p class="message">{{message.text}}</p>
 
-    </div>
+    </div>  
     <div class="message-wrapper">
-      <div class="avatar">
+      <div class="avatar hidden-img">
       </div>
       <p class="message typing" *ngIf="isTyping">
         Yuriy is typing
