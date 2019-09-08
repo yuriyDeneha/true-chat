@@ -55,7 +55,7 @@ export class ChatComponent implements OnInit {
       setTimeout(() => {
         this.storeInitialMessagesToStorage();
         this.subscribeToChatChanges();
-      }, this.messages[0].delay + this.messages[1].delay + this.messages[2].delay + this.messages[3].delay);
+      }, this.messages[0].delay + this.messages[1].delay + this.messages[2].delay + this.messages[3].delay) + 1000;
     } else {
       this.messagesAsync = previousConversation;    
       this.subscribeToChatChanges();
