@@ -21,6 +21,8 @@
     "build:server": "ng run universal-demo:server:production",
     "build:prod": "ng build --prod",
     "build:universal": "ng run universal-demo:build:production && ng run universal-demo:server:production && webpack --progress --colors",
+    "gh-pages": "ng build --prod --base-href 'https://yuriyDeneha.github.io/true-chat/' && ngh",
+    "publish": "npm run build:universal --base-href 'https://yuriyDeneha.github.io/true-chat/'",
     "server": "node server.js",
     "test": "ng test",
     "test:ssr": "run-p test:ssr:*",
