@@ -44,15 +44,24 @@ export class StorageService {
     return messages;
   }
 
-  generateId(array: Array<number>) {
-    const min = 10;
-    const max = 1000000;
+  generateId(array: Array<number> = [], min = 10, max = 1000000, ) {
     let rand;
     do {
       rand = Math.floor(Math.random() * (max - min + 1) + min);
     } while (array.some((item) => item === rand));
 
     return rand;
+  }
+
+  getConversationId(): string {
+    let conversationId = this.getItem('conversationId');
+
+    if (!conversationId) {
+      conversationId = this.generateId([], 5, 99);
+      this.setItem('conversationId', conversationId);
+    }
+
+    return conversationId;
   }
 
   isString(value) {

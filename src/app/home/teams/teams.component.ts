@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { HomeService } from '../services/chat.service';
+import { ChatService } from '../services/chat.service';
 
 @Component({
   selector: 'app-teams',
@@ -68,15 +68,15 @@ export class TeamsComponent implements OnInit {
     }
   ];
 
-  constructor(private home: HomeService) { }
+  constructor(private chat: ChatService) { }
 
   ngOnInit() {
-    this.home.selectedConversation = this.conversations[this.selectedConversationIndex];
+    this.chat.selectedConversation = this.conversations[this.selectedConversationIndex];
   }
 
   openConversation(index) {
     this.selectedConversationIndex = index;
-    this.home.selectedConversation = this.conversations[index];
+    this.chat.selectedConversation = this.conversations[index];
   }
 
 }

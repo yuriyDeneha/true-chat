@@ -1,5 +1,4 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { HomeService } from '../../../services/chat.service';
 import { StorageService } from '../../../services/storage.service';
 
 @Component({

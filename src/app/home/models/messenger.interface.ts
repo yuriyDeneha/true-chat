@@ -24,6 +24,8 @@ export class Message {
   }
 }
 
+export type Messages = Array<Message>;
+
 export interface TelegramResponse {
   ok: boolean;
   result: Array<any>;

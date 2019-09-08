@@ -19,9 +19,12 @@ export class HomeComponent implements OnInit {
   services = [
     'web development',
     'IT consulting',
-    'ui/ux design',
+    'UX/UI design',
     'hybrid mobile development',
     'startup MVP development',
+    'top-performing remote teams',
+    'quality assurance\n',
+    'developers, who scale your tech team up',
     'remote developers for hire',
     'tech support after release'
   ];

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from '../services/chat.service';
+import { ChatService } from '../services/chat.service';
 import { StorageService } from '../services/storage.service';
 import { Message } from '../models/messenger.interface';
 
@@ -12,7 +12,7 @@ export class ChatComponent implements OnInit {
 
   messages: Message[] = [
     {
-      text: 'Hi, my name is *NAME*',
+      text: 'Hi Yuriy, I\'m *NAME*',
       delay: 1000,
       author: {
         type: 'rockStar',
@@ -41,10 +41,9 @@ export class ChatComponent implements OnInit {
     }
   ];
 
-  isTyping: boolean = false;
   messagesAsync = [];
   constructor(
-    public home: HomeService,
+    public chat: ChatService,
     private storage: StorageService
   ) { }
 
@@ -54,16 +53,19 @@ export class ChatComponent implements OnInit {
     if (!previousConversation) {
       this.startConversation();
       setTimeout(() => {
-        this.messages.forEach((message: Message) => this.storage.updateMessages(message));
-        this.getChatUpdates();
-      }, this.messages[0].delay + this.messages[1].delay + this.messages[2].delay);
+        this.storeInitialMessagesToStorage();
+        this.subscribeToChatChanges();
+      }, this.messages[0].delay + this.messages[1].delay + this.messages[2].delay + this.messages[3].delay);
     } else {
       this.messagesAsync = previousConversation;    
-      this.getChatUpdates();
+      this.subscribeToChatChanges();
     }
 
   }
 
+  storeInitialMessagesToStorage() {
+    this.messages.forEach((message: Message) => this.storage.updateMessages(message));
+  }
 
   async startConversation() {
     for (const message of this.messages) {
@@ -73,12 +75,12 @@ export class ChatComponent implements OnInit {
 
   async addMessageToChat (messageObject) {
     await this.delay(500);
-    this.isTyping = true;
+    this.chat.isTyping = true;
     await this.delay(messageObject.delay);
     messageObject.text = this.setMessageValues(messageObject.text);
     messageObject.date = messageObject.date || new Date();
     this.messagesAsync.push(messageObject);
-    this.isTyping = false;
+    this.chat.isTyping = false;
   }
 
   delay(delay) {
@@ -132,17 +134,17 @@ export class ChatComponent implements OnInit {
   }
 
   sendMessage(message) {
-    if (!message){
+    if (!message) {
       return;
     }
-    this.home.sendMessage(message)
+    this.chat.sendMessage(message)
       .subscribe(response => {
         console.log(response);
       });
   }
 
-  getChatUpdates() {
-    this.home.getChatUpdates()
+  subscribeToChatChanges() {
+    this.chat.getChatUpdates()
       .subscribe((messages: Message[]) => {
 
         if (messages.length !== this.messagesAsync.length) {
