@@ -22,7 +22,7 @@
     "build:prod": "ng build --prod",
     "build:universal": "ng run universal-demo:build:production && ng run universal-demo:server:production && webpack --progress --colors",
     "gh-pages": "ng build --prod --base-href 'https://yuriyDeneha.github.io/true-chat/' && ngh",
-    "publish": "ng build --prod --base-href \"https://yuriyDeneha.github.io/true-chat/\" && git add dist && git commit -m \"Initial dist subtree commit\" && git subtree push --prefix dist origin gh-pages" ,
+    "publish": "ng build --prod --base-href \"https://yuriyDeneha.github.io/true-chat/\" && git add dist && git commit -m \"Initial dist subtree commit\" && git push origin `git subtree split --prefix dist master`:gh-pages --force" ,
     "server": "node server.js",
     "test": "ng test",
     "test:ssr": "run-p test:ssr:*",
