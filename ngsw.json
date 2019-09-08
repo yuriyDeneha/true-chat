@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1567948747241,
+  "timestamp": 1567951445918,
   "index": "https://yuriyDeneha.github.io/true-chat/index.html",
   "assetGroups": [
     {
@@ -8,13 +8,13 @@
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "urls": [
-        "https://yuriyDeneha.github.io/true-chat/3.88fa9d1f47ebf7ee1f31.js",
+        "https://yuriyDeneha.github.io/true-chat/3.6a5bda252fdab91fdbfb.js",
         "https://yuriyDeneha.github.io/true-chat/4.e6c3a55f884ca318029a.js",
         "https://yuriyDeneha.github.io/true-chat/favicon.ico",
         "https://yuriyDeneha.github.io/true-chat/index.html",
-        "https://yuriyDeneha.github.io/true-chat/main.73c9b5efd981d4ce8ed1.js",
+        "https://yuriyDeneha.github.io/true-chat/main.ffef1edc8f6d4fb8aabe.js",
         "https://yuriyDeneha.github.io/true-chat/polyfills.f6f98287ca941f249841.js",
-        "https://yuriyDeneha.github.io/true-chat/runtime.659bf13cd46edb400598.js"
+        "https://yuriyDeneha.github.io/true-chat/runtime.a6828bbe80e7ddf8743b.js"
       ],
       "patterns": []
     },
@@ -46,7 +46,7 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "https://yuriyDeneha.github.io/true-chat/3.88fa9d1f47ebf7ee1f31.js": "a41ec08bb2e9e6863e2eb88b6730fe2dc3bac6c8",
+    "https://yuriyDeneha.github.io/true-chat/3.6a5bda252fdab91fdbfb.js": "c6a7a2cd578a04d24762313eb7c325a59d11d62f",
     "https://yuriyDeneha.github.io/true-chat/4.e6c3a55f884ca318029a.js": "28a794945f5e36116ea67d06f82d3d03ff0f2396",
     "https://yuriyDeneha.github.io/true-chat/assets/i18n/en.json": "483f8fd3fea47c3c9303645ccdebbd969cd0f415",
     "https://yuriyDeneha.github.io/true-chat/assets/i18n/ru.json": "312e542618dee8277865dc6937361e41b599ae89",
@@ -66,10 +66,10 @@
     "https://yuriyDeneha.github.io/true-chat/assets/img/universal.png": "e02806a051ebe4e1441ed6c3034767aaa4e57a20",
     "https://yuriyDeneha.github.io/true-chat/assets/img/yura.jpg": "b31ce82dc4cd054a7e336c2015303202f528768e",
     "https://yuriyDeneha.github.io/true-chat/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "https://yuriyDeneha.github.io/true-chat/index.html": "bfe3debdfe2c15bae5df0d12f17884533270ac8a",
-    "https://yuriyDeneha.github.io/true-chat/main.73c9b5efd981d4ce8ed1.js": "7ab32a3c4a8c35d614108ab9b013ea4bd6a23d59",
+    "https://yuriyDeneha.github.io/true-chat/index.html": "75793efd684dc5d769b29cb4e0fc2ea33633624c",
+    "https://yuriyDeneha.github.io/true-chat/main.ffef1edc8f6d4fb8aabe.js": "eab144579f3a2ed8795bba40464275012a23b72d",
     "https://yuriyDeneha.github.io/true-chat/polyfills.f6f98287ca941f249841.js": "637bea172beeba9a6fc1df44b2be693797f6a484",
-    "https://yuriyDeneha.github.io/true-chat/runtime.659bf13cd46edb400598.js": "0a925d226afb550d13511be25da42f6db9d88da4"
+    "https://yuriyDeneha.github.io/true-chat/runtime.a6828bbe80e7ddf8743b.js": "d91d1dd78a247d0537e1bae68bd57cc7ee3f59dc"
   },
   "navigationUrls": [
     {
