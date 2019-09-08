@@ -1,0 +1,92 @@
+{
+  "configVersion": 1,
+  "timestamp": 1567945832310,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/3.a2cfe780cf3dfdf3c9f8.js",
+        "/4.e6c3a55f884ca318029a.js",
+        "/favicon.ico",
+        "/index.html",
+        "/main.73c9b5efd981d4ce8ed1.js",
+        "/polyfills.f6f98287ca941f249841.js",
+        "/runtime.510231ec369084a1274a.js"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "/assets/i18n/en.json",
+        "/assets/i18n/ru.json",
+        "/assets/icon/angular.png",
+        "/assets/icons/icon-128x128.png",
+        "/assets/icons/icon-144x144.png",
+        "/assets/icons/icon-152x152.png",
+        "/assets/icons/icon-192x192.png",
+        "/assets/icons/icon-384x384.png",
+        "/assets/icons/icon-512x512.png",
+        "/assets/icons/icon-72x72.png",
+        "/assets/icons/icon-96x96.png",
+        "/assets/icons/waving.png",
+        "/assets/img/github-circle-white-transparent.svg",
+        "/assets/img/logo_black.png",
+        "/assets/img/logo_white.png",
+        "/assets/img/universal.png",
+        "/assets/img/yura.jpg"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/3.a2cfe780cf3dfdf3c9f8.js": "0c12c3d5b570c55e03d0bcfc7dd024e356a3f7b9",
+    "/4.e6c3a55f884ca318029a.js": "28a794945f5e36116ea67d06f82d3d03ff0f2396",
+    "/assets/i18n/en.json": "483f8fd3fea47c3c9303645ccdebbd969cd0f415",
+    "/assets/i18n/ru.json": "312e542618dee8277865dc6937361e41b599ae89",
+    "/assets/icon/angular.png": "9a88437923f74515d02f683690a605512199df85",
+    "/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/assets/icons/waving.png": "c693b18c71fbf8dce4b91ff0f5573b80b4d6fb4d",
+    "/assets/img/github-circle-white-transparent.svg": "5659974046466df7da6f95ee1a2241093f8499c1",
+    "/assets/img/logo_black.png": "e525bafaacf6f7726a986f8807d714171ea49de8",
+    "/assets/img/logo_white.png": "76d986c67306245107ac8e1ccfcccd9dfe2dd956",
+    "/assets/img/universal.png": "e02806a051ebe4e1441ed6c3034767aaa4e57a20",
+    "/assets/img/yura.jpg": "b31ce82dc4cd054a7e336c2015303202f528768e",
+    "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
+    "/index.html": "8cfac6a10b9063b1f94c06284fd870a5a61d5ff8",
+    "/main.73c9b5efd981d4ce8ed1.js": "7ab32a3c4a8c35d614108ab9b013ea4bd6a23d59",
+    "/polyfills.f6f98287ca941f249841.js": "637bea172beeba9a6fc1df44b2be693797f6a484",
+    "/runtime.510231ec369084a1274a.js": "e71c7a76717e94959a3257f90187eb018bc70c2f"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}
